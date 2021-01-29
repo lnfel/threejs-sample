@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My first three.js app</title>
+    <title>lnfel learns | Three.js</title>
 
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0px;
@@ -15,11 +16,20 @@
             width: 100%;
             height: 100%;
         }
+
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
-<body>
-    
-    <canvas id="c"></canvas>
+<body class="bg-black text-white">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl">Three.js sample render</h1>
+        <p>Docs: <span><a href="https://threejs.org/docs/">threejs.org</a></span></p>
+        <p>Source: <span><a href="https://threejsfundamentals.org/threejs/lessons/threejs-fundamentals.html">threejsfundamentals.org</a></span></p>
+        <canvas id="c"></canvas>
+    </div>
+
     <script src="js/three.js"></script>
     <script>
         const scene = new THREE.Scene();
@@ -67,7 +77,6 @@
             makeInstance(geometry, 0x8844aa, -2),
             makeInstance(geometry, 0xaa8844, 2),
         ];
-        /**/
 
         function resizeRendererToDisplaySize(renderer) {
             const canvas = renderer.domElement;
