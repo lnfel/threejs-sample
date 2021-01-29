@@ -54,12 +54,23 @@
 
         camera.position.z = 5;
 
+        // Fog
+        {
+            const near = 1;
+            const far = 7;
+            const color = 'lightblue';
+            scene.fog = new THREE.Fog(color, near, far);
+            scene.background = new THREE.Color(color);
+        }
+
         // Lighting
-        const color = 0xFFFFFF;
-        const intensity = 1;
-        const light = new THREE.DirectionalLight(color, intensity);
-        light.position.set(-1, 2, 4);
-        scene.add(light);
+        {
+            const color = 0xFFFFFF;
+            const intensity = 1;
+            const light = new THREE.DirectionalLight(color, intensity);
+            light.position.set(-1, 2, 4);
+            scene.add(light);
+        }
 
         function makeInstance(geometry, color, x) {
             const material = new THREE.MeshPhongMaterial({color});
