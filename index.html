@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>lnfel learns | Three.js</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; upgrade-insecure-requests;">
+    <meta http-equiv="Feature-Policy" content="autoplay 'self' ./audio/;">
+    
 
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="css/tailwind.min.css" rel="stylesheet">
     <style>
+        :root {
+            --text: 'Click on the page to see the animation!';
+        }
+
         * {
             margin: 0px;
             padding: 0px;
@@ -20,15 +27,32 @@
         a:hover {
             text-decoration: underline;
         }
+
+        body::before {
+            content: var(--text);
+            position: absolute;
+            width: max-content;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 1;
+        }
     </style>
 </head>
-<body class="bg-black text-white">
+<body class="relative bg-black text-white h-screen">
     <div class="container mx-auto p-4">
         <h1 class="text-3xl">Three.js sample render</h1>
         <p>Docs: <span><a href="https://threejs.org/docs/">threejs.org</a></span></p>
         <p>Source: <span><a href="https://threejsfundamentals.org/threejs/lessons/threejs-fundamentals.html">threejsfundamentals.org</a></span></p>
         <canvas id="c"></canvas>
     </div>
+
+    <!-- <iframe src="audio/tsunomaki-watame-bgm.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display:none"></iframe> -->
+
+    <audio muted loop>
+      <source src="audio/tsunomaki-watame-bgm.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+    </audio>
 
     <script src="js/three.js"></script>
     <script>
@@ -121,7 +145,24 @@
             //cube.rotation.y += 0.01;
             renderer.render( scene, camera );
         }
-        animate();
+        //animate();
+
+        // https://codepen.io/lasjorg/full/MWgJRaq
+        window.addEventListener("DOMContentLoaded", event => {
+          const audio = document.querySelector("audio");
+          audio.volume = 0.2;
+          //audio.play();
+            document.body.addEventListener("click", function () {
+                // remove freakin ::after
+                document.documentElement.style.setProperty('--text', 'akjshdkjas');
+                //getComputedStyle(document.querySelector('body'), ':before').content = '';
+                audio.autoplay = true;
+                audio.muted = false;
+                audio.play();
+                animate();
+                console.log('click');
+            });
+        });
     </script>
 </body>
 </html>
